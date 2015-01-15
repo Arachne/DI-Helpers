@@ -1,0 +1,26 @@
+extensions:
+	arachne.dihelpers: Arachne\DIHelpers\DI\DIHelpersExtension
+
+services:
+	resolver:
+		tags:
+			arachne.di.resolver: foo
+
+	foo1:
+		class: ArrayObject([ foo1 ])
+		tags:
+			foo: name1
+
+	foo2:
+		class: ArrayObject([ foo2 ])
+		tags:
+			foo:
+				- name2
+				- name3
+
+	foo3:
+		class: ArrayObject([ foo3 ])
+		tags:
+			foo:
+				arachne.di.resolver.name: name4
+				- name5
