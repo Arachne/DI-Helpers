@@ -10,7 +10,7 @@ use Mockery\MockInterface;
 use Nette\DI\Container;
 
 /**
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class DIResolverTest extends Test
 {

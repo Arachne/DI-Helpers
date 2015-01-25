@@ -2,6 +2,7 @@
 
 namespace Tests\Integration;
 
+use Arachne\Codeception\ConfigFilesInterface;
 use Arachne\DI\ResolverInterface;
 use ArrayObject;
 use Codeception\TestCase\Test;
@@ -10,16 +11,22 @@ use Nette\DI\Container;
 /**
  * @author Jáchym Toušek
  */
-class ExtensionTest extends Test
+class ExtensionTest extends Test implements ConfigFilesInterface
 {
 
 	/** @var ResolverInterface */
 	private $resolver;
 
+	public function getConfigFiles()
+	{
+		return [
+			'config/config.neon',
+		];
+	}
+
 	public function _before()
 	{
-		parent::_before();
-		$this->resolver = $this->guy->grabService(Container::class)->getService('resolver');
+		$this->resolver = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.resolver.foo');
 	}
 
 	public function testResolver()
