@@ -36,6 +36,18 @@ class DIHelpersExtension extends CompilerExtension
 		return $this->prefix('resolver.' . $tag);
 	}
 
+	/**
+	 * @param string $tag
+	 * @return string
+	 */
+	public function getResolver($tag)
+	{
+		if (!isset($this->resolvers[$tag])) {
+			throw new AssertionException("Resolver for tag '$tag' is not registered.");
+		}
+		return $this->prefix('resolver.' . $tag);
+	}
+
 	public function beforeCompile()
 	{
 		$builder = $this->getContainerBuilder();
