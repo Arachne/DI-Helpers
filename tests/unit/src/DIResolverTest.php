@@ -47,6 +47,15 @@ class DIResolverTest extends Test
 		$this->assertSame(NULL, $this->resolver->resolve('invalid'));
 	}
 
+	public function testIterator()
+	{
+		$this->setupContainerMock('service1');
+
+		$this->assertEquals([
+			'valid' => (object) [ 'service1' ],
+		], iterator_to_array($this->resolver->getIterator()));
+	}
+
 	private function setupContainerMock($name)
 	{
 		$this->container

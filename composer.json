@@ -16,6 +16,7 @@
 	"require-dev": {
 		"php": ">=5.5.0",
 		"arachne/devtools": "~0.1",
+		"guzzle/iterator": "~3.9",
 		"nette/nette": "~2.2"
 	},
 	"autoload": {

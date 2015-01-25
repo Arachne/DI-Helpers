@@ -10,13 +10,17 @@
 
 namespace Arachne\DIHelpers;
 
+use ArrayIterator;
+use Guzzle\Iterator\MapIterator;
+use Iterator;
+use IteratorAggregate;
 use Nette\DI\Container;
 use Nette\Object;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class DIResolver extends Object implements ResolverInterface
+class DIResolver extends Object implements IteratorAggregate, ResolverInterface
 {
 
 	const NAME_KEY = 'arachne.resolver.name';
@@ -43,6 +47,16 @@ class DIResolver extends Object implements ResolverInterface
 	public function resolve($name)
 	{
 		return isset($this->services[$name]) ? $this->container->getService($this->services[$name]) : NULL;
+	}
+
+	/**
+	 * @return Iterator
+	 */
+	public function getIterator()
+	{
+		return new MapIterator(new ArrayIterator($this->services), function ($service) {
+			return $this->container->getService($service);
+		});
 	}
 
 }
