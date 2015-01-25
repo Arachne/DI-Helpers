@@ -13,7 +13,7 @@ use Nette\Utils\Validators;
 class TestExtension extends CompilerExtension
 {
 
-	public function beforeCompile()
+	public function loadConfiguration()
 	{
 		$this->getExtension(DIHelpersExtension::class)->addResolver('foo', 'ArrayObject');
 	}

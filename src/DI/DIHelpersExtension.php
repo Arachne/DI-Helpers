@@ -11,6 +11,7 @@
 namespace Arachne\DIHelpers\DI;
 
 use Nette\DI\CompilerExtension;
+use Nette\PhpGenerator\ClassType;
 use Nette\Utils\AssertionException;
 
 /**
@@ -21,6 +22,9 @@ class DIHelpersExtension extends CompilerExtension
 
 	const RESOLVER_NAME = 'arachne.di.resolver.name';
 
+	/** @var string[] */
+	private $resolvers = [];
+
 	/**
 	 * @param string $tag
 	 * @param string $type
@@ -28,32 +32,47 @@ class DIHelpersExtension extends CompilerExtension
 	 */
 	public function addResolver($tag, $type = NULL)
 	{
+		$this->resolvers[$tag] = $type;
+		return $this->prefix('resolver.' . $tag);
+	}
+
+	public function beforeCompile()
+	{
 		$builder = $this->getContainerBuilder();
 
-		$services = [];
-		foreach ($builder->findByTag($tag) as $key => $value) {
-			$names = (array) (isset($value[self::RESOLVER_NAME]) ? $value[self::RESOLVER_NAME] : $value);
-			if ($type) {
-				$class = $builder->getDefinition($key)->getClass();
-				if ($class !== $type && !is_subclass_of($class, $type)) {
-					throw new AssertionException("Service '$key' is not an instance of '$type'.");
+		foreach ($this->resolvers as $tag => $type) {
+			$services = [];
+			foreach ($builder->findByTag($tag) as $key => $value) {
+				$names = (array) (isset($value[self::RESOLVER_NAME]) ? $value[self::RESOLVER_NAME] : $value);
+				if ($type) {
+					$class = $builder->getDefinition($key)->getClass();
+					if ($class !== $type && !is_subclass_of($class, $type)) {
+						throw new AssertionException("Service '$key' is not an instance of '$type'.");
+					}
+				}
+				foreach ($names as $name) {
+					$services[$name] = $key;
 				}
 			}
-			foreach ($names as $name) {
-				$services[$name] = $key;
-			}
+
+			$service = $this->prefix('resolver.' . $tag);
+
+			$builder->addDefinition($service)
+				->setClass('Arachne\DIHelpers\DIResolver')
+				->setArguments([
+					'services' => $services,
+				])
+				->setAutowired(FALSE);
 		}
 
-		$service = $this->prefix('resolver.' . $tag);
+		$this->resolvers = [];
+	}
 
-		$builder->addDefinition($service)
-			->setClass('Arachne\DIHelpers\DIResolver')
-			->setArguments([
-				'services' => $services,
-			])
-			->setAutowired(FALSE);
-
-		return $service;
+	public function afterCompile(ClassType $class)
+	{
+		if ($this->resolvers) {
+			throw new AssertionException("Some resolvers were added too late. Please do not use addResolver method in beforeCompile.");
+		}
 	}
 
 }
