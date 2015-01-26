@@ -63,7 +63,14 @@ class DIHelpersExtension extends CompilerExtension
 					}
 				}
 				foreach ($names as $name) {
-					$services[$name] = $key;
+					if (is_string($name)) {
+						if (isset($services[$name])) {
+							throw new AssertionException("Services '$services[$name]' and '$key' both have resolver name '$name' for tag '$tag'.");
+						}
+						$services[$name] = $key;
+					} else {
+						$services[] = $key;
+					}
 				}
 			}
 

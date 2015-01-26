@@ -21,3 +21,13 @@ services:
 			foo:
 				arachne.di.resolver.name: name4
 				- name5
+
+	foo4:
+		class: ArrayObject([ foo4 ])
+		tags:
+			- foo
+
+	foo5:
+		class: ArrayObject([ foo5 ])
+		tags:
+			- foo
