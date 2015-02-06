@@ -11,8 +11,8 @@
 	],
 	"require": {
 		"php": ">=5.4.0",
-		"guzzle/iterator": "~3.9",
-		"nette/di": "~2.2"
+		"nette/di": "~2.2",
+		"nette/utils": "~2.2"
 	},
 	"require-dev": {
 		"php": ">=5.5.0",

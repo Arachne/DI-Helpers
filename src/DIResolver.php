@@ -11,9 +11,9 @@
 namespace Arachne\DIHelpers;
 
 use ArrayIterator;
-use Guzzle\Iterator\MapIterator;
 use Iterator;
 use IteratorAggregate;
+use Nette\Iterators\Mapper;
 use Nette\DI\Container;
 use Nette\Object;
 
@@ -54,7 +54,7 @@ class DIResolver extends Object implements IteratorAggregate, ResolverInterface
 	 */
 	public function getIterator()
 	{
-		return new MapIterator(new ArrayIterator($this->services), function ($service) {
+		return new Mapper(new ArrayIterator($this->services), function ($service) {
 			return $this->container->getService($service);
 		});
 	}
