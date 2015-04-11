@@ -44,7 +44,7 @@ class DIResolverTest extends Test
 
 	public function testResolverInvalid()
 	{
-		$this->assertSame(NULL, $this->resolver->resolve('invalid'));
+		$this->assertSame(null, $this->resolver->resolve('invalid'));
 	}
 
 	public function testIterator()

@@ -37,8 +37,8 @@ class ExtensionTest extends Test implements ConfigFilesInterface
 		$this->assertEquals(new ArrayObject([ 'foo3' ]), $this->resolver->resolve('name4'));
 		$this->assertEquals(new ArrayObject([ 'foo4' ]), $this->resolver->resolve(0));
 		$this->assertEquals(new ArrayObject([ 'foo5' ]), $this->resolver->resolve(1));
-		$this->assertSame(NULL, $this->resolver->resolve('name5'));
-		$this->assertSame(NULL, $this->resolver->resolve('name6'));
+		$this->assertSame(null, $this->resolver->resolve('name5'));
+		$this->assertSame(null, $this->resolver->resolve('name6'));
 	}
 
 }

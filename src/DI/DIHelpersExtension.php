@@ -35,7 +35,7 @@ class DIHelpersExtension extends CompilerExtension
 	 * @param string $type
 	 * @return string
 	 */
-	public function addResolver($tag, $type = NULL)
+	public function addResolver($tag, $type = null)
 	{
 		if ($this->freeze) {
 			throw new AssertionException("Usage addResolver is only allowed in loadConfiguration.");
@@ -60,7 +60,7 @@ class DIHelpersExtension extends CompilerExtension
 	 * @param bool $override
 	 * @return string
 	 */
-	public function getResolver($tag, $override = TRUE)
+	public function getResolver($tag, $override = true)
 	{
 		if (!$this->freeze) {
 			throw new AssertionException("Usage of getResolver is only allowed in beforeCompile. Also make sure that DIHelpersExtension is registered before your extension.");
@@ -76,7 +76,7 @@ class DIHelpersExtension extends CompilerExtension
 
 	public function beforeCompile()
 	{
-		$this->freeze = TRUE;
+		$this->freeze = true;
 
 		$builder = $this->getContainerBuilder();
 
@@ -109,7 +109,7 @@ class DIHelpersExtension extends CompilerExtension
 				->setArguments([
 					'services' => $services,
 				])
-				->setAutowired(FALSE);
+				->setAutowired(false);
 		}
 	}
 

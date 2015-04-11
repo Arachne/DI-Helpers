@@ -46,7 +46,7 @@ class DIResolver extends Object implements IteratorAggregate, ResolverInterface
 	 */
 	public function resolve($name)
 	{
-		return isset($this->services[$name]) ? $this->container->getService($this->services[$name]) : NULL;
+		return isset($this->services[$name]) ? $this->container->getService($this->services[$name]) : null;
 	}
 
 	/**
