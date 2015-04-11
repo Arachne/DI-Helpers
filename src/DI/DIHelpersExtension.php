@@ -57,14 +57,15 @@ class DIHelpersExtension extends CompilerExtension
 
 	/**
 	 * @param string $tag
+	 * @param bool $override
 	 * @return string
 	 */
-	public function getResolver($tag)
+	public function getResolver($tag, $override = TRUE)
 	{
 		if (!$this->freeze) {
 			throw new AssertionException("Usage of getResolver is only allowed in beforeCompile. Also make sure that DIHelpersExtension is registered before your extension.");
 		}
-		if (isset($this->overrides[$tag])) {
+		if ($override && isset($this->overrides[$tag])) {
 			return $this->overrides[$tag];
 		}
 		if (!isset($this->resolvers[$tag])) {
