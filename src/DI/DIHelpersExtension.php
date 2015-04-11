@@ -11,7 +11,6 @@
 namespace Arachne\DIHelpers\DI;
 
 use Nette\DI\CompilerExtension;
-use Nette\PhpGenerator\ClassType;
 use Nette\Utils\AssertionException;
 
 /**
@@ -25,6 +24,12 @@ class DIHelpersExtension extends CompilerExtension
 	/** @var string[] */
 	private $resolvers = [];
 
+	/** @var string[] */
+	private $overrides = [];
+
+	/** @var bool */
+	private $freeze;
+
 	/**
 	 * @param string $tag
 	 * @param string $type
@@ -32,8 +37,22 @@ class DIHelpersExtension extends CompilerExtension
 	 */
 	public function addResolver($tag, $type = NULL)
 	{
+		if ($this->freeze) {
+			throw new AssertionException("Usage addResolver is only allowed in loadConfiguration.");
+		}
 		$this->resolvers[$tag] = $type;
-		return $this->prefix('resolver.' . $tag);
+	}
+
+	/**
+	 * @param string $tag
+	 * @param string $service
+	 */
+	public function overrideResolver($tag, $service)
+	{
+		if ($this->freeze) {
+			throw new AssertionException("Usage overrideResolver is only allowed in loadConfiguration.");
+		}
+		$this->overrides[$tag] = $service;
 	}
 
 	/**
@@ -42,6 +61,12 @@ class DIHelpersExtension extends CompilerExtension
 	 */
 	public function getResolver($tag)
 	{
+		if (!$this->freeze) {
+			throw new AssertionException("Usage of getResolver is only allowed in beforeCompile. Also make sure that DIHelpersExtension is registered before your extension.");
+		}
+		if (isset($this->overrides[$tag])) {
+			return $this->overrides[$tag];
+		}
 		if (!isset($this->resolvers[$tag])) {
 			throw new AssertionException("Resolver for tag '$tag' is not registered.");
 		}
@@ -50,6 +75,8 @@ class DIHelpersExtension extends CompilerExtension
 
 	public function beforeCompile()
 	{
+		$this->freeze = TRUE;
+
 		$builder = $this->getContainerBuilder();
 
 		foreach ($this->resolvers as $tag => $type) {
@@ -82,15 +109,6 @@ class DIHelpersExtension extends CompilerExtension
 					'services' => $services,
 				])
 				->setAutowired(FALSE);
-		}
-
-		$this->resolvers = [];
-	}
-
-	public function afterCompile(ClassType $class)
-	{
-		if ($this->resolvers) {
-			throw new AssertionException("Some resolvers were added too late. Please do not use addResolver method in beforeCompile.");
 		}
 	}
 
