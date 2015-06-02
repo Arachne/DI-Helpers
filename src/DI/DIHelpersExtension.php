@@ -38,7 +38,7 @@ class DIHelpersExtension extends CompilerExtension
 	public function addResolver($tag, $type = null)
 	{
 		if ($this->freeze) {
-			throw new AssertionException("Usage addResolver is only allowed in loadConfiguration.");
+			throw new AssertionException("Usage of addResolver is only allowed in loadConfiguration.");
 		}
 		$this->resolvers[$tag] = $type;
 	}
@@ -50,7 +50,7 @@ class DIHelpersExtension extends CompilerExtension
 	public function overrideResolver($tag, $service)
 	{
 		if ($this->freeze) {
-			throw new AssertionException("Usage overrideResolver is only allowed in loadConfiguration.");
+			throw new AssertionException("Usage of overrideResolver is only allowed in loadConfiguration.");
 		}
 		$this->overrides[$tag] = $service;
 	}
