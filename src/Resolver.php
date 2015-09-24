@@ -20,7 +20,7 @@ use Nette\Object;
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class DIResolver extends Object implements IteratorAggregate, ResolverInterface
+class Resolver implements ResolverInterface
 {
 
 	/** @var string[] */
@@ -45,16 +45,6 @@ class DIResolver extends Object implements IteratorAggregate, ResolverInterface
 	public function resolve($name)
 	{
 		return isset($this->services[$name]) ? $this->container->getService($this->services[$name]) : null;
-	}
-
-	/**
-	 * @return Iterator
-	 */
-	public function getIterator()
-	{
-		return new Mapper(new ArrayIterator($this->services), function ($service) {
-			return $this->container->getService($service);
-		});
 	}
 
 }

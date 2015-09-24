@@ -10,12 +10,10 @@
 
 namespace Arachne\DIHelpers;
 
-use Traversable;
-
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-interface ResolverInterface extends Traversable
+interface ResolverInterface
 {
 
 	/**

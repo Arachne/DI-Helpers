@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
+use Arachne\DIHelpers\Resolver;
 use Arachne\DIHelpers\ResolverInterface;
-use Arachne\DIHelpers\DIResolver;
-use Codeception\TestCase\Test;
+use Codeception\MockeryModule\Test;
 use Mockery;
 use Mockery\MockInterface;
 use Nette\DI\Container;
@@ -12,10 +12,10 @@ use Nette\DI\Container;
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
  */
-class DIResolverTest extends Test
+class ResolverTest extends Test
 {
 
-	/** @var DIResolver */
+	/** @var Resolver */
 	private $resolver;
 
 	/** @var MockInterface */
@@ -28,7 +28,7 @@ class DIResolverTest extends Test
 		];
 
 		$this->container = Mockery::mock(Container::class);
-		$this->resolver = new DIResolver($services, $this->container);
+		$this->resolver = new Resolver($services, $this->container);
 	}
 
 	public function testImplement()
@@ -36,33 +36,20 @@ class DIResolverTest extends Test
 		$this->assertInstanceOf(ResolverInterface::class, $this->resolver);
 	}
 
-	public function testResolverValid()
-	{
-		$this->setupContainerMock('service1');
-		$this->assertEquals((object) [ 'service1' ], $this->resolver->resolve('valid'));
-	}
-
-	public function testResolverInvalid()
-	{
-		$this->assertSame(null, $this->resolver->resolve('invalid'));
-	}
-
-	public function testIterator()
-	{
-		$this->setupContainerMock('service1');
-
-		$this->assertEquals([
-			'valid' => (object) [ 'service1' ],
-		], iterator_to_array($this->resolver->getIterator()));
-	}
-
-	private function setupContainerMock($name)
+	public function testValid()
 	{
 		$this->container
 			->shouldReceive('getService')
 			->once()
-			->with($name)
-			->andReturn((object) [ $name ]);
+			->with('service1')
+			->andReturn((object) [ 'service1' ]);
+
+		$this->assertEquals((object) [ 'service1' ], $this->resolver->resolve('valid'));
+	}
+
+	public function testInvalid()
+	{
+		$this->assertSame(null, $this->resolver->resolve('invalid'));
 	}
 
 }
