@@ -23,8 +23,6 @@ use Nette\Object;
 class DIResolver extends Object implements IteratorAggregate, ResolverInterface
 {
 
-	const NAME_KEY = 'arachne.resolver.name';
-
 	/** @var string[] */
 	private $services;
 
