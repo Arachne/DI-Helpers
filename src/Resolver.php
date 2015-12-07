@@ -10,12 +10,7 @@
 
 namespace Arachne\DIHelpers;
 
-use ArrayIterator;
-use Iterator;
-use IteratorAggregate;
-use Nette\Iterators\Mapper;
 use Nette\DI\Container;
-use Nette\Object;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
