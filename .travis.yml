@@ -3,7 +3,6 @@ language: php
 env:
   matrix:
     - NETTE=nette-2.3
-    - NETTE=nette-2.2 COMPOSER=composer-nette_2.2.json
 
 php:
   - 5.5

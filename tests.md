@@ -33,19 +33,3 @@ You can use these commands to do more specific tasks.
 # run specific test
 ./vendor/bin/codecept run tests/unit/src/FooTest.php
 ```
-
-Testing with Nette 2.2
-----
-
-If you want to run the tests with Nette 2.2 use these commands to install the dependencies. Then run the tests normally.
-
-```
-# tell composer to use different json file
-set COMPOSER=composer-nette_2.2.json
-
-# install dependencies
-composer update
-
-# reset the environment variable to normal
-set COMPOSER=composer.json
-```
