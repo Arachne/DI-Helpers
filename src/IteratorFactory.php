@@ -21,22 +21,21 @@ use Nette\DI\Container;
 class IteratorFactory
 {
 
-	/** @var Container */
-	private $container;
+    /** @var Container */
+    private $container;
 
-	public function __construct(Container $container)
-	{
-		$this->container = $container;
-	}
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
 
-	/**
-	 * @return Iterator
-	 */
-	public function create(array $services)
-	{
-		return new Mapper(new ArrayIterator($services), function ($service) {
-			return $this->container->getService($service);
-		});
-	}
-
+    /**
+     * @return Iterator
+     */
+    public function create(array $services)
+    {
+        return new Mapper(new ArrayIterator($services), function ($service) {
+            return $this->container->getService($service);
+        });
+    }
 }

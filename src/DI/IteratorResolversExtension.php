@@ -19,33 +19,32 @@ use Nette\Utils\AssertionException;
 class IteratorResolversExtension extends CompilerExtension
 {
 
-	use TagHelpersTrait;
+    use TagHelpersTrait;
 
-	const NAME_ATTRIBUTE = 'arachne.dihelpers.iteratorresolver';
+    const NAME_ATTRIBUTE = 'arachne.dihelpers.iteratorresolver';
 
-	public function processTags()
-	{
-		$builder = $this->getContainerBuilder();
+    public function processTags()
+    {
+        $builder = $this->getContainerBuilder();
 
-		foreach ($this->tags as $tag => $type) {
-			$services = [];
-			foreach ($builder->findByTag($tag) as $key => $attributes) {
-				$names = (array) (isset($attributes[self::NAME_ATTRIBUTE]) ? $attributes[self::NAME_ATTRIBUTE] : $attributes);
-				foreach ($names as $name) {
-					if (!is_string($name)) {
-						throw new AssertionException("Service '$key' has no resolver name for tag '$tag'.");
-					}
-					$services[$name][] = $key;
-				}
-			}
+        foreach ($this->tags as $tag => $type) {
+            $services = [];
+            foreach ($builder->findByTag($tag) as $key => $attributes) {
+                $names = (array) (isset($attributes[self::NAME_ATTRIBUTE]) ? $attributes[self::NAME_ATTRIBUTE] : $attributes);
+                foreach ($names as $name) {
+                    if (!is_string($name)) {
+                        throw new AssertionException("Service '$key' has no resolver name for tag '$tag'.");
+                    }
+                    $services[$name][] = $key;
+                }
+            }
 
-			$builder->addDefinition($this->prefixTag($tag))
-				->setClass('Arachne\DIHelpers\IteratorResolver')
-				->setArguments([
-					'services' => $services,
-				])
-				->setAutowired(false);
-		}
-	}
-
+            $builder->addDefinition($this->prefixTag($tag))
+                ->setClass('Arachne\DIHelpers\IteratorResolver')
+                ->setArguments([
+                    'services' => $services,
+                ])
+                ->setAutowired(false);
+        }
+    }
 }

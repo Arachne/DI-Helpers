@@ -18,28 +18,27 @@ use Iterator;
 class IteratorResolver implements ResolverInterface
 {
 
-	/** @var string[] */
-	private $services;
+    /** @var string[] */
+    private $services;
 
-	/** @var IteratorFactory */
-	private $iteratorFactory;
+    /** @var IteratorFactory */
+    private $iteratorFactory;
 
-	/**
-	 * @param string[][] $services
-	 */
-	public function __construct(array $services, IteratorFactory $iteratorFactory)
-	{
-		$this->services = $services;
-		$this->iteratorFactory = $iteratorFactory;
-	}
+    /**
+     * @param string[][] $services
+     */
+    public function __construct(array $services, IteratorFactory $iteratorFactory)
+    {
+        $this->services = $services;
+        $this->iteratorFactory = $iteratorFactory;
+    }
 
-	/**
-	 * @param string $name
-	 * @return Iterator
-	 */
-	public function resolve($name)
-	{
-		return isset($this->services[$name]) ? $this->iteratorFactory->create($this->services[$name]) : null;
-	}
-
+    /**
+     * @param string $name
+     * @return Iterator
+     */
+    public function resolve($name)
+    {
+        return isset($this->services[$name]) ? $this->iteratorFactory->create($this->services[$name]) : null;
+    }
 }

@@ -15,18 +15,17 @@ use Nette\Utils\Validators;
 class TestExtension extends CompilerExtension
 {
 
-	public function loadConfiguration()
-	{
-		$this->getExtension(ResolversExtension::class)->add('foo', 'ArrayObject');
-		$this->getExtension(IteratorsExtension::class)->add('foo', 'ArrayObject');
-		$this->getExtension(IteratorResolversExtension::class)->add('foo', 'ArrayObject');
-	}
+    public function loadConfiguration()
+    {
+        $this->getExtension(ResolversExtension::class)->add('foo', 'ArrayObject');
+        $this->getExtension(IteratorsExtension::class)->add('foo', 'ArrayObject');
+        $this->getExtension(IteratorResolversExtension::class)->add('foo', 'ArrayObject');
+    }
 
-	public function beforeCompile()
-	{
-		$this->getExtension(ResolversExtension::class)->get('foo');
-		$this->getExtension(IteratorsExtension::class)->get('foo');
-		$this->getExtension(IteratorResolversExtension::class)->get('foo');
-	}
-
+    public function beforeCompile()
+    {
+        $this->getExtension(ResolversExtension::class)->get('foo');
+        $this->getExtension(IteratorsExtension::class)->get('foo');
+        $this->getExtension(IteratorResolversExtension::class)->get('foo');
+    }
 }

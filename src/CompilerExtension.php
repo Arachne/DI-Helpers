@@ -19,21 +19,20 @@ use Nette\Utils\AssertionException;
 class CompilerExtension extends BaseCompilerExtension
 {
 
-	/**
-	 * @param string $class
-	 * @return BaseCompilerExtension
-	 */
-	public function getExtension($class, $need = true)
-	{
-		$extensions = $this->compiler->getExtensions($class);
-		$count = count($extensions);
-		if ($count > 1) {
-			throw new AssertionException("Extension '$class' is installed $count times.");
-		}
-		if ($count < 1 && $need) {
-			throw new AssertionException("Extension '$class' is not installed.");
-		}
-		return $count === 1 ? reset($extensions) : null;
-	}
-
+    /**
+     * @param string $class
+     * @return BaseCompilerExtension
+     */
+    public function getExtension($class, $need = true)
+    {
+        $extensions = $this->compiler->getExtensions($class);
+        $count = count($extensions);
+        if ($count > 1) {
+            throw new AssertionException("Extension '$class' is installed $count times.");
+        }
+        if ($count < 1 && $need) {
+            throw new AssertionException("Extension '$class' is not installed.");
+        }
+        return $count === 1 ? reset($extensions) : null;
+    }
 }

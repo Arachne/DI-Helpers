@@ -19,36 +19,35 @@ use Nette\Utils\AssertionException;
 class ResolversExtension extends CompilerExtension
 {
 
-	use TagHelpersTrait;
+    use TagHelpersTrait;
 
-	const NAME_ATTRIBUTE = 'arachne.dihelpers.resolver';
+    const NAME_ATTRIBUTE = 'arachne.dihelpers.resolver';
 
-	public function processTags()
-	{
-		$builder = $this->getContainerBuilder();
+    public function processTags()
+    {
+        $builder = $this->getContainerBuilder();
 
-		foreach ($this->tags as $tag => $type) {
-			$services = [];
-			foreach ($builder->findByTag($tag) as $key => $attributes) {
-				$names = (array) (isset($attributes[self::NAME_ATTRIBUTE]) ? $attributes[self::NAME_ATTRIBUTE] : $attributes);
-				foreach ($names as $name) {
-					if (!is_string($name)) {
-						throw new AssertionException("Service '$key' has no resolver name for tag '$tag'.");
-					}
-					if (isset($services[$name])) {
-						throw new AssertionException("Services '$services[$name]' and '$key' both have resolver name '$name' for tag '$tag'.");
-					}
-					$services[$name] = $key;
-				}
-			}
+        foreach ($this->tags as $tag => $type) {
+            $services = [];
+            foreach ($builder->findByTag($tag) as $key => $attributes) {
+                $names = (array) (isset($attributes[self::NAME_ATTRIBUTE]) ? $attributes[self::NAME_ATTRIBUTE] : $attributes);
+                foreach ($names as $name) {
+                    if (!is_string($name)) {
+                        throw new AssertionException("Service '$key' has no resolver name for tag '$tag'.");
+                    }
+                    if (isset($services[$name])) {
+                        throw new AssertionException("Services '$services[$name]' and '$key' both have resolver name '$name' for tag '$tag'.");
+                    }
+                    $services[$name] = $key;
+                }
+            }
 
-			$builder->addDefinition($this->prefixTag($tag))
-				->setClass('Arachne\DIHelpers\Resolver')
-				->setArguments([
-					'services' => $services,
-				])
-				->setAutowired(false);
-		}
-	}
-
+            $builder->addDefinition($this->prefixTag($tag))
+                ->setClass('Arachne\DIHelpers\Resolver')
+                ->setArguments([
+                    'services' => $services,
+                ])
+                ->setAutowired(false);
+        }
+    }
 }

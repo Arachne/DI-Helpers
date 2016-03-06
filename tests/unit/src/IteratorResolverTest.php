@@ -17,43 +17,42 @@ use Nette\DI\Container;
 class IteratorResolverTest extends Test
 {
 
-	/** @var Resolver */
-	private $resolver;
+    /** @var Resolver */
+    private $resolver;
 
-	/** @var MockInterface */
-	private $factory;
+    /** @var MockInterface */
+    private $factory;
 
-	protected function _before()
-	{
-		$services = [
-			'valid' => [
-				'service1',
-			],
-		];
+    protected function _before()
+    {
+        $services = [
+            'valid' => [
+                'service1',
+            ],
+        ];
 
-		$this->factory = Mockery::mock(IteratorFactory::class);
-		$this->resolver = new IteratorResolver($services, $this->factory);
-	}
+        $this->factory = Mockery::mock(IteratorFactory::class);
+        $this->resolver = new IteratorResolver($services, $this->factory);
+    }
 
-	public function testImplement()
-	{
-		$this->assertInstanceOf(ResolverInterface::class, $this->resolver);
-	}
+    public function testImplement()
+    {
+        $this->assertInstanceOf(ResolverInterface::class, $this->resolver);
+    }
 
-	public function testValid()
-	{
-		$this->factory
-			->shouldReceive('create')
-			->once()
-			->with([ 'service1' ])
-			->andReturn(new ArrayIterator([ (object) [ 'service1' ] ]));
+    public function testValid()
+    {
+        $this->factory
+            ->shouldReceive('create')
+            ->once()
+            ->with([ 'service1' ])
+            ->andReturn(new ArrayIterator([ (object) [ 'service1' ] ]));
 
-		$this->assertEquals([ (object) [ 'service1' ] ], iterator_to_array($this->resolver->resolve('valid')));
-	}
+        $this->assertEquals([ (object) [ 'service1' ] ], iterator_to_array($this->resolver->resolve('valid')));
+    }
 
-	public function testInvalid()
-	{
-		$this->assertSame(null, $this->resolver->resolve('invalid'));
-	}
-
+    public function testInvalid()
+    {
+        $this->assertSame(null, $this->resolver->resolve('invalid'));
+    }
 }

@@ -19,25 +19,24 @@ use Nette\Utils\AssertionException;
 class IteratorsExtension extends CompilerExtension
 {
 
-	use TagHelpersTrait;
+    use TagHelpersTrait;
 
-	public function processTags()
-	{
-		$this->freeze = true;
+    public function processTags()
+    {
+        $this->freeze = true;
 
-		$builder = $this->getContainerBuilder();
+        $builder = $this->getContainerBuilder();
 
-		$builder->addDefinition($this->prefix('iteratorFactory'))
-			->setClass('Arachne\DIHelpers\IteratorFactory');
+        $builder->addDefinition($this->prefix('iteratorFactory'))
+            ->setClass('Arachne\DIHelpers\IteratorFactory');
 
-		foreach ($this->tags as $tag => $type) {
-			$builder->addDefinition($this->prefixTag($tag))
-				->setClass('Iterator')
-				->setFactory('@Arachne\DIHelpers\IteratorFactory::create', [
-					array_keys($builder->findByTag($tag)),
-				])
-				->setAutowired(false);
-		}
-	}
-
+        foreach ($this->tags as $tag => $type) {
+            $builder->addDefinition($this->prefixTag($tag))
+                ->setClass('Iterator')
+                ->setFactory('@Arachne\DIHelpers\IteratorFactory::create', [
+                    array_keys($builder->findByTag($tag)),
+                ])
+                ->setAutowired(false);
+        }
+    }
 }

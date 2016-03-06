@@ -16,10 +16,9 @@ namespace Arachne\DIHelpers;
 interface ResolverInterface
 {
 
-	/**
-	 * @param string $name
-	 * @return object
-	 */
-	public function resolve($name);
-
+    /**
+     * @param string $name
+     * @return object
+     */
+    public function resolve($name);
 }

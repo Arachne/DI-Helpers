@@ -15,41 +15,40 @@ use Nette\DI\Container;
 class ResolverTest extends Test
 {
 
-	/** @var Resolver */
-	private $resolver;
+    /** @var Resolver */
+    private $resolver;
 
-	/** @var MockInterface */
-	private $container;
+    /** @var MockInterface */
+    private $container;
 
-	protected function _before()
-	{
-		$services = [
-			'valid' => 'service1',
-		];
+    protected function _before()
+    {
+        $services = [
+            'valid' => 'service1',
+        ];
 
-		$this->container = Mockery::mock(Container::class);
-		$this->resolver = new Resolver($services, $this->container);
-	}
+        $this->container = Mockery::mock(Container::class);
+        $this->resolver = new Resolver($services, $this->container);
+    }
 
-	public function testImplement()
-	{
-		$this->assertInstanceOf(ResolverInterface::class, $this->resolver);
-	}
+    public function testImplement()
+    {
+        $this->assertInstanceOf(ResolverInterface::class, $this->resolver);
+    }
 
-	public function testValid()
-	{
-		$this->container
-			->shouldReceive('getService')
-			->once()
-			->with('service1')
-			->andReturn((object) [ 'service1' ]);
+    public function testValid()
+    {
+        $this->container
+            ->shouldReceive('getService')
+            ->once()
+            ->with('service1')
+            ->andReturn((object) [ 'service1' ]);
 
-		$this->assertEquals((object) [ 'service1' ], $this->resolver->resolve('valid'));
-	}
+        $this->assertEquals((object) [ 'service1' ], $this->resolver->resolve('valid'));
+    }
 
-	public function testInvalid()
-	{
-		$this->assertSame(null, $this->resolver->resolve('invalid'));
-	}
-
+    public function testInvalid()
+    {
+        $this->assertSame(null, $this->resolver->resolve('invalid'));
+    }
 }
