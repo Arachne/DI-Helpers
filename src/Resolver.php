@@ -17,11 +17,14 @@ use Nette\DI\Container;
  */
 class Resolver implements ResolverInterface
 {
-
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     private $services;
 
-    /** @var Container */
+    /**
+     * @var Container
+     */
     private $container;
 
     /**

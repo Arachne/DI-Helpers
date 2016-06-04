@@ -20,8 +20,9 @@ use Nette\DI\Container;
  */
 class IteratorFactory
 {
-
-    /** @var Container */
+    /**
+     * @var Container
+     */
     private $container;
 
     public function __construct(Container $container)

@@ -15,7 +15,6 @@ namespace Arachne\DIHelpers;
  */
 interface ResolverInterface
 {
-
     /**
      * @param string $name
      * @return object

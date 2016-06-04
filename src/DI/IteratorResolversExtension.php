@@ -18,7 +18,6 @@ use Nette\Utils\AssertionException;
  */
 class IteratorResolversExtension extends CompilerExtension
 {
-
     use TagHelpersTrait;
 
     const NAME_ATTRIBUTE = 'arachne.dihelpers.iteratorresolver';

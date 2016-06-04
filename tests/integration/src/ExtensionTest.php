@@ -11,7 +11,6 @@ use Nette\DI\Container;
  */
 class ExtensionTest extends Test
 {
-
     public function testResolver()
     {
         $resolver = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.foo');

@@ -18,7 +18,6 @@ use Nette\Utils\AssertionException;
  */
 class CompilerExtension extends BaseCompilerExtension
 {
-
     /**
      * @param string $class
      * @return BaseCompilerExtension

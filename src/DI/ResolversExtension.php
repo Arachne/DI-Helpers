@@ -18,7 +18,6 @@ use Nette\Utils\AssertionException;
  */
 class ResolversExtension extends CompilerExtension
 {
-
     use TagHelpersTrait;
 
     const NAME_ATTRIBUTE = 'arachne.dihelpers.resolver';

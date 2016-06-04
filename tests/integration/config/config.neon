@@ -1,26 +1,26 @@
 extensions:
-	arachne.dihelpers.iterators: Arachne\DIHelpers\DI\IteratorsExtension
-	arachne.dihelpers.resolvers: Arachne\DIHelpers\DI\ResolversExtension
-	arachne.dihelpers.iteratorresolvers: Arachne\DIHelpers\DI\IteratorResolversExtension
-	test: Tests\Integration\Classes\TestExtension
+    arachne.dihelpers.iterators: Arachne\DIHelpers\DI\IteratorsExtension
+    arachne.dihelpers.resolvers: Arachne\DIHelpers\DI\ResolversExtension
+    arachne.dihelpers.iteratorresolvers: Arachne\DIHelpers\DI\IteratorResolversExtension
+    test: Tests\Integration\Classes\TestExtension
 
 services:
-	foo1:
-		class: ArrayObject([ foo1 ])
-		tags:
-			foo: name1
+    foo1:
+        class: ArrayObject([ foo1 ])
+        tags:
+            foo: name1
 
-	foo2:
-		class: ArrayObject([ foo2 ])
-		tags:
-			foo:
-				- name2
-				- name3
+    foo2:
+        class: ArrayObject([ foo2 ])
+        tags:
+            foo:
+                - name2
+                - name3
 
-	foo3:
-		class: ArrayObject([ foo3 ])
-		tags:
-			foo:
-				arachne.dihelpers.resolver: name4
-				arachne.dihelpers.iteratorresolver: name4
-				- name5
+    foo3:
+        class: ArrayObject([ foo3 ])
+        tags:
+            foo:
+                arachne.dihelpers.resolver: name4
+                arachne.dihelpers.iteratorresolver: name4
+                - name5

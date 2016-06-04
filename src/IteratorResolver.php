@@ -17,11 +17,14 @@ use Iterator;
  */
 class IteratorResolver implements ResolverInterface
 {
-
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     private $services;
 
-    /** @var IteratorFactory */
+    /**
+     * @var IteratorFactory
+     */
     private $iteratorFactory;
 
     /**

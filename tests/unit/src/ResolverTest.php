@@ -14,11 +14,14 @@ use Nette\DI\Container;
  */
 class ResolverTest extends Test
 {
-
-    /** @var Resolver */
+    /**
+     * @var Resolver
+     */
     private $resolver;
 
-    /** @var MockInterface */
+    /**
+     * @var MockInterface
+     */
     private $container;
 
     protected function _before()

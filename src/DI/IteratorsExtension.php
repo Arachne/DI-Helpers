@@ -18,7 +18,6 @@ use Nette\Utils\AssertionException;
  */
 class IteratorsExtension extends CompilerExtension
 {
-
     use TagHelpersTrait;
 
     public function processTags()

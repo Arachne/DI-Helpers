@@ -17,7 +17,6 @@ use Nette\Utils\AssertionException;
  */
 trait TagHelpersTrait
 {
-
     /** @var string[] */
     private $tags = [];
 

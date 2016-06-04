@@ -13,11 +13,14 @@ use Nette\DI\Container;
  */
 class IteratorFactoryTest extends Test
 {
-
-    /** @var IteratorFactory */
+    /**
+     * @var IteratorFactory
+     */
     private $factory;
 
-    /** @var MockInterface */
+    /**
+     * @var MockInterface
+     */
     private $container;
 
     protected function _before()
