@@ -1,3 +1,5 @@
+actor: Tester
+
 paths:
     tests: tests
     log: tests/_log
@@ -6,14 +8,7 @@ paths:
 
 settings:
     bootstrap: _bootstrap.php
-    suite_class: \PHPUnit_Framework_TestSuite
-    colors: false
-    memory_limit: 1024M
     log: true
-
-extensions:
-    enabled:
-        - Arachne\Codeception\Tracy\Logger
 
 coverage:
     enabled: true

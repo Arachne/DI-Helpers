@@ -1,37 +1,37 @@
 {
-	"name": "arachne/di-helpers",
-	"type": "library",
-	"keywords": [ "nette", "arachne", "di" ],
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Jáchym Toušek",
-			"homepage": "http://enumag.cz",
-			"email": "enumag@gmail.com"
-		}
-	],
-	"require": {
-		"php": ">=5.4.0",
-		"nette/di": "~2.3",
-		"nette/utils": "~2.3"
-	},
-	"require-dev": {
-		"php": ">=5.5.0",
-		"arachne/codeception": "~0.6.3",
-		"codeception/codeception": "~2.1.0",
-		"codeception/mockery-module": "~0.2.2",
-		"mockery/mockery": "~0.9",
-		"tracy/tracy": "~2.3"
-	},
-	"autoload": {
-		"psr-4": {
-			"Arachne\\DIHelpers\\": "src"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Tests\\Unit\\": "tests/unit/src",
-			"Tests\\Integration\\": "tests/integration/src"
-		}
-	}
+    "name": "arachne/di-helpers",
+    "description": "Adds some features to nette/di. Used by arachne/forms and other libraries.",
+    "type": "library",
+    "keywords": [ "nette", "arachne", "di" ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jáchym Toušek",
+            "homepage": "http://enumag.cz",
+            "email": "enumag@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.4.0|^7.0.0",
+        "nette/di": "^2.3.0",
+        "nette/utils": "^2.3.0"
+    },
+    "require-dev": {
+        "php": "^5.5.0|^7.0.0",
+        "arachne/codeception": "^0.6.3",
+        "codeception/codeception": "~2.2.0",
+        "codeception/mockery-module": "^0.2.2",
+        "mockery/mockery": "^0.9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arachne\\DIHelpers\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Unit\\": "tests/unit/src",
+            "Tests\\Integration\\": "tests/integration/src"
+        }
+    }
 }
