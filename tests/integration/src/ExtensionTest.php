@@ -2,18 +2,20 @@
 
 namespace Tests\Integration;
 
+use Arachne\Bootstrap\Configurator;
 use ArrayObject;
-use Codeception\TestCase\Test;
+use Codeception\Test\Unit;
 use Nette\DI\Container;
 
 /**
  * @author Jáchym Toušek
  */
-class ExtensionTest extends Test
+class ExtensionTest extends Unit
 {
     public function testResolver()
     {
-        $resolver = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.resolvers.tag.foo');
+        $container = $this->createContainer('config.neon');
+        $resolver = $container->getService('arachne.dihelpers.resolvers.tag.foo');
 
         $this->assertEquals(new ArrayObject([ 'foo1' ]), $resolver->resolve('name1'));
         $this->assertEquals(new ArrayObject([ 'foo2' ]), $resolver->resolve('name2'));
@@ -25,7 +27,8 @@ class ExtensionTest extends Test
 
     public function testIterator()
     {
-        $iterator = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.iterators.tag.foo');
+        $container = $this->createContainer('config.neon');
+        $iterator = $container->getService('arachne.dihelpers.iterators.tag.foo');
 
         $this->assertEquals([
             new ArrayObject([ 'foo1' ]),
@@ -36,7 +39,8 @@ class ExtensionTest extends Test
 
     public function testIteratorResolver()
     {
-        $resolver = $this->guy->grabService(Container::class)->getService('arachne.dihelpers.iteratorresolvers.tag.foo');
+        $container = $this->createContainer('config.neon');
+        $resolver = $container->getService('arachne.dihelpers.iteratorresolvers.tag.foo');
 
         $this->assertEquals([ new ArrayObject([ 'foo1' ]) ], iterator_to_array($resolver->resolve('name1')));
         $this->assertEquals([ new ArrayObject([ 'foo2' ]) ], iterator_to_array($resolver->resolve('name2')));
@@ -44,5 +48,13 @@ class ExtensionTest extends Test
         $this->assertEquals([ new ArrayObject([ 'foo3' ]) ], iterator_to_array($resolver->resolve('name4')));
         $this->assertSame(null, $resolver->resolve('name5'));
         $this->assertSame(null, $resolver->resolve('name6'));
+    }
+
+    private function createContainer($file)
+    {
+        $config = new Configurator();
+        $config->setTempDirectory(TEMP_DIR);
+        $config->addConfig(__DIR__ . '/../config/' . $file);
+        return $config->createContainer();
     }
 }

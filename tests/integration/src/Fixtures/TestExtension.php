@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\Classes;
+namespace Tests\Integration\Fixtures;
 
 use Arachne\DIHelpers\DI\IteratorResolversExtension;
 use Arachne\DIHelpers\DI\IteratorsExtension;

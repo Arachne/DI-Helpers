@@ -2,7 +2,7 @@ extensions:
     arachne.dihelpers.iterators: Arachne\DIHelpers\DI\IteratorsExtension
     arachne.dihelpers.resolvers: Arachne\DIHelpers\DI\ResolversExtension
     arachne.dihelpers.iteratorresolvers: Arachne\DIHelpers\DI\IteratorResolversExtension
-    test: Tests\Integration\Classes\TestExtension
+    test: Tests\Integration\Fixtures\TestExtension
 
 services:
     foo1:
