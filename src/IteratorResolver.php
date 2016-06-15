@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of the Arachne
  *
  * Copyright (c) Jáchym Toušek (enumag@gmail.com)
@@ -38,6 +38,7 @@ class IteratorResolver implements ResolverInterface
 
     /**
      * @param string $name
+     *
      * @return Iterator
      */
     public function resolve($name)

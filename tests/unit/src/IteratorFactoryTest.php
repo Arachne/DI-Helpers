@@ -35,13 +35,13 @@ class IteratorFactoryTest extends Test
             ->shouldReceive('getService')
             ->once()
             ->with('service1')
-            ->andReturn((object) [ 'service1' ]);
+            ->andReturn((object) ['service1']);
 
         $this->container
             ->shouldReceive('getService')
             ->once()
             ->with('service2')
-            ->andReturn((object) [ 'service2' ]);
+            ->andReturn((object) ['service2']);
 
         $services = [
             'service1',
@@ -49,8 +49,8 @@ class IteratorFactoryTest extends Test
         ];
 
         $this->assertEquals([
-            (object) [ 'service1' ],
-            (object) [ 'service2' ]
+            (object) ['service1'],
+            (object) ['service2'],
         ], iterator_to_array($this->factory->create($services)));
     }
 }

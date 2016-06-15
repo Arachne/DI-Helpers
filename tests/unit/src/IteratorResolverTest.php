@@ -9,7 +9,6 @@ use ArrayIterator;
 use Codeception\MockeryModule\Test;
 use Mockery;
 use Mockery\MockInterface;
-use Nette\DI\Container;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>
@@ -48,10 +47,10 @@ class IteratorResolverTest extends Test
         $this->factory
             ->shouldReceive('create')
             ->once()
-            ->with([ 'service1' ])
-            ->andReturn(new ArrayIterator([ (object) [ 'service1' ] ]));
+            ->with(['service1'])
+            ->andReturn(new ArrayIterator([(object) ['service1']]));
 
-        $this->assertEquals([ (object) [ 'service1' ] ], iterator_to_array($this->resolver->resolve('valid')));
+        $this->assertEquals([(object) ['service1']], iterator_to_array($this->resolver->resolve('valid')));
     }
 
     public function testInvalid()

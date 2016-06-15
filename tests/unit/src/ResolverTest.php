@@ -45,9 +45,9 @@ class ResolverTest extends Test
             ->shouldReceive('getService')
             ->once()
             ->with('service1')
-            ->andReturn((object) [ 'service1' ]);
+            ->andReturn((object) ['service1']);
 
-        $this->assertEquals((object) [ 'service1' ], $this->resolver->resolve('valid'));
+        $this->assertEquals((object) ['service1'], $this->resolver->resolve('valid'));
     }
 
     public function testInvalid()

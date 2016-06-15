@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of the Arachne
  *
  * Copyright (c) Jáchym Toušek (enumag@gmail.com)
@@ -12,8 +12,8 @@ namespace Arachne\DIHelpers;
 
 use ArrayIterator;
 use Iterator;
-use Nette\Iterators\Mapper;
 use Nette\DI\Container;
+use Nette\Iterators\Mapper;
 
 /**
  * @author Jáchym Toušek <enumag@gmail.com>

@@ -2,10 +2,10 @@
 
 namespace Tests\Integration\Fixtures;
 
+use Arachne\DIHelpers\CompilerExtension;
 use Arachne\DIHelpers\DI\IteratorResolversExtension;
 use Arachne\DIHelpers\DI\IteratorsExtension;
 use Arachne\DIHelpers\DI\ResolversExtension;
-use Arachne\DIHelpers\CompilerExtension;
 use Nette\Utils\AssertionException;
 use Nette\Utils\Validators;
 

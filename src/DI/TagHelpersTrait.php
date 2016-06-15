@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * This file is part of the Arachne
  *
  * Copyright (c) Jáchym Toušek (enumag@gmail.com)
@@ -29,12 +29,13 @@ trait TagHelpersTrait
     /**
      * @param string $tag
      * @param string $type
+     *
      * @return string
      */
     public function add($tag, $type = null)
     {
         if ($this->freeze) {
-            throw new AssertionException('Usage of ' . __CLASS__ . '::add() is only allowed in loadConfiguration.');
+            throw new AssertionException('Usage of '.__CLASS__.'::add() is only allowed in loadConfiguration.');
         }
         $this->tags[$tag] = $type;
     }
@@ -46,20 +47,21 @@ trait TagHelpersTrait
     public function override($tag, $service)
     {
         if ($this->freeze) {
-            throw new AssertionException('Usage of ' . __CLASS__ . '::override() is only allowed in loadConfiguration.');
+            throw new AssertionException('Usage of '.__CLASS__.'::override() is only allowed in loadConfiguration.');
         }
         $this->overrides[$tag] = $service;
     }
 
     /**
      * @param string $tag
-     * @param bool $override
+     * @param bool   $override
+     *
      * @return string
      */
     public function get($tag, $override = true)
     {
         if (!$this->freeze) {
-            throw new AssertionException('Usage of ' . __CLASS__ . '::get() is only allowed in beforeCompile. Also make sure that ' . __CLASS__ . ' is registered before all extensions which use it.');
+            throw new AssertionException('Usage of '.__CLASS__.'::get() is only allowed in beforeCompile. Also make sure that '.__CLASS__.' is registered before all extensions which use it.');
         }
         if ($override && isset($this->overrides[$tag])) {
             return $this->overrides[$tag];
@@ -67,6 +69,7 @@ trait TagHelpersTrait
         if (!isset($this->tags[$tag])) {
             throw new AssertionException("Tag '$tag' is not registered.");
         }
+
         return $this->prefixTag($tag);
     }
 
@@ -93,10 +96,11 @@ trait TagHelpersTrait
 
     /**
      * @param string $tag
+     *
      * @return string
      */
     private function prefixTag($tag)
     {
-        return $this->prefix('tag.' . $tag);
+        return $this->prefix('tag.'.$tag);
     }
 }
