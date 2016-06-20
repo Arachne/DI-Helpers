@@ -2,19 +2,17 @@
 
 namespace Tests\Integration;
 
-use Arachne\Bootstrap\Configurator;
 use ArrayObject;
 use Codeception\Test\Unit;
 
 /**
- * @author Jáchym Toušek
+ * @author Jáchym Toušek <enumag@gmail.com>
  */
 class ExtensionTest extends Unit
 {
     public function testResolver()
     {
-        $container = $this->createContainer('config.neon');
-        $resolver = $container->getService('arachne.dihelpers.resolvers.tag.foo');
+        $resolver = $this->tester->getContainer()->getService('arachne.dihelpers.resolvers.tag.foo');
 
         $this->assertEquals(new ArrayObject(['foo1']), $resolver->resolve('name1'));
         $this->assertEquals(new ArrayObject(['foo2']), $resolver->resolve('name2'));
@@ -26,8 +24,7 @@ class ExtensionTest extends Unit
 
     public function testIterator()
     {
-        $container = $this->createContainer('config.neon');
-        $iterator = $container->getService('arachne.dihelpers.iterators.tag.foo');
+        $iterator = $this->tester->getContainer()->getService('arachne.dihelpers.iterators.tag.foo');
 
         $this->assertEquals([
             new ArrayObject(['foo1']),
@@ -38,8 +35,7 @@ class ExtensionTest extends Unit
 
     public function testIteratorResolver()
     {
-        $container = $this->createContainer('config.neon');
-        $resolver = $container->getService('arachne.dihelpers.iteratorresolvers.tag.foo');
+        $resolver = $this->tester->getContainer()->getService('arachne.dihelpers.iteratorresolvers.tag.foo');
 
         $this->assertEquals([new ArrayObject(['foo1'])], iterator_to_array($resolver->resolve('name1')));
         $this->assertEquals([new ArrayObject(['foo2'])], iterator_to_array($resolver->resolve('name2')));
@@ -47,14 +43,5 @@ class ExtensionTest extends Unit
         $this->assertEquals([new ArrayObject(['foo3'])], iterator_to_array($resolver->resolve('name4')));
         $this->assertSame(null, $resolver->resolve('name5'));
         $this->assertSame(null, $resolver->resolve('name6'));
-    }
-
-    private function createContainer($file)
-    {
-        $config = new Configurator();
-        $config->setTempDirectory(TEMP_DIR);
-        $config->addConfig(__DIR__.'/../config/'.$file);
-
-        return $config->createContainer();
     }
 }
