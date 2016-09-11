@@ -39,7 +39,7 @@ class IteratorResolver implements ResolverInterface
     /**
      * @param string $name
      *
-     * @return Iterator
+     * @return Iterator|null
      */
     public function resolve($name)
     {

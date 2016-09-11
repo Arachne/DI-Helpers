@@ -35,8 +35,11 @@ class IteratorFactory
      */
     public function create(array $services)
     {
-        return new Mapper(new ArrayIterator($services), function ($service) {
-            return $this->container->getService($service);
-        });
+        return new Mapper(
+            new ArrayIterator($services),
+            function ($service) {
+                return $this->container->getService($service);
+            }
+        );
     }
 }

@@ -39,7 +39,7 @@ class Resolver implements ResolverInterface
     /**
      * @param string $name
      *
-     * @return object
+     * @return object|null
      */
     public function resolve($name)
     {

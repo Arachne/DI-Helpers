@@ -43,9 +43,11 @@ class ResolversExtension extends CompilerExtension
 
             $builder->addDefinition($this->prefixTag($tag))
                 ->setClass('Arachne\DIHelpers\Resolver')
-                ->setArguments([
-                    'services' => $services,
-                ])
+                ->setArguments(
+                    [
+                        'services' => $services,
+                    ]
+                )
                 ->setAutowired(false);
         }
     }

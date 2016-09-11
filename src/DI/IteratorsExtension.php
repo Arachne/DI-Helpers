@@ -31,9 +31,12 @@ class IteratorsExtension extends CompilerExtension
         foreach ($this->tags as $tag => $type) {
             $builder->addDefinition($this->prefixTag($tag))
                 ->setClass('Iterator')
-                ->setFactory('@Arachne\DIHelpers\IteratorFactory::create', [
-                    array_keys($builder->findByTag($tag)),
-                ])
+                ->setFactory(
+                    '@Arachne\DIHelpers\IteratorFactory::create',
+                    [
+                        array_keys($builder->findByTag($tag)),
+                    ]
+                )
                 ->setAutowired(false);
         }
     }

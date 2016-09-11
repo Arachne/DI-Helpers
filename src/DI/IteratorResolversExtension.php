@@ -40,9 +40,11 @@ class IteratorResolversExtension extends CompilerExtension
 
             $builder->addDefinition($this->prefixTag($tag))
                 ->setClass('Arachne\DIHelpers\IteratorResolver')
-                ->setArguments([
-                    'services' => $services,
-                ])
+                ->setArguments(
+                    [
+                        'services' => $services,
+                    ]
+                )
                 ->setAutowired(false);
         }
     }
