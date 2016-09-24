@@ -21,8 +21,6 @@ class IteratorsExtension extends CompilerExtension
 
     public function processTags()
     {
-        $this->freeze = true;
-
         $builder = $this->getContainerBuilder();
 
         $builder->addDefinition($this->prefix('iteratorFactory'))
