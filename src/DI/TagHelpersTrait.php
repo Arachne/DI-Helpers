@@ -17,18 +17,24 @@ use Nette\Utils\AssertionException;
  */
 trait TagHelpersTrait
 {
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     private $tags = [];
 
-    /** @var string[] */
+    /**
+     * @var string[]
+     */
     private $overrides = [];
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     private $freeze;
 
     /**
-     * @param string $tag
-     * @param string $type
+     * @param string      $tag
+     * @param string|null $type
      *
      * @return string
      */
